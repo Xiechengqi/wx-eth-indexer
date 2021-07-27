@@ -33,3 +33,9 @@ CREATE INDEX txto_index
     ON public.ethtxs USING btree
     (txto COLLATE pg_catalog."default")
     TABLESPACE pg_default;
+    
+CREATE INDEX txhash
+    ON public.ethtxs USING btree
+    (txhash COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+    

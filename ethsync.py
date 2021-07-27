@@ -86,14 +86,17 @@ def insertion(blockid, tr):
                 log_addr = log['address'].lower()
                 if len(log['topics'])> 0 and log['topics'][0].hex() == transfer_topic :
                     try:
+                        to=log_addr
                         event = erc.events.Transfer().processLog(log)['args']
                         contract_to = "0"*(64-len(event['to'][2:]))+event['to'][2:]
                         contract_value = "0"*(64-len(hex(event['value'])[2:]))+hex(event['value'])[2:]
                     except Exception as e:
                         try:
+                            to=log_addr
                             event = erc_721.events.Transfer().processLog(log)['args']
                             contract_to = "0"*(64-len(event['to'][2:]))+event['to'][2:]
                             contract_value = hex(event['tokenId'])[2:]
+                            to=log_addr
                         except Exception as e:
                             continue
                     logger.info(contract_to)
